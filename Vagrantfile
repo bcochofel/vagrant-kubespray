@@ -22,7 +22,7 @@ end
 VAGRANTFILE_API_VERSION = "2"
 DEFAULT_BOX_NAME = "bento/ubuntu-18.04"
 
-kubespray_ver = ENV["KUBESPRAY_VER"] || "v2.13.0"
+kubespray_ver = ENV["KUBESPRAY_VER"] || "v2.13.1"
 kube_version = ENV["KUBE_VERSION"] || "v1.17.5"
 kube_network_plugin = ENV["KUBE_NETWORK_PLUGIN"] || "calico"
 cluster_name = ENV["CLUSTER_NAME"] || "k8slab"
