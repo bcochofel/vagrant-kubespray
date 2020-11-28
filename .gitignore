@@ -3,3 +3,6 @@
 
 # Log files (if you are creating logs in debug mode, uncomment this)
 # *.log
+
+# IntelliJ IDEA
+.idea/
