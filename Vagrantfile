@@ -20,10 +20,10 @@ end
 
 # Vagrant variables
 VAGRANTFILE_API_VERSION = "2"
-DEFAULT_BOX_NAME = "bento/ubuntu-18.04"
+DEFAULT_BOX_NAME = "bento/ubuntu-20.04"
 
-kubespray_ver = ENV["KUBESPRAY_VER"] || "v2.13.1"
-kube_version = ENV["KUBE_VERSION"] || "v1.17.6"
+kubespray_ver = ENV["KUBESPRAY_VER"] || "v2.14.2"
+kube_version = ENV["KUBE_VERSION"] || "v1.18.10"
 kube_network_plugin = ENV["KUBE_NETWORK_PLUGIN"] || "calico"
 cluster_name = ENV["CLUSTER_NAME"] || "k8slab"
 dns_domain = ENV["DNS_DOMAIN"] || "cluster.local"
