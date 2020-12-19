@@ -8,3 +8,4 @@ repos:
       - id: detect-private-key
       - id: check-merge-conflict
       - id: no-commit-to-branch
+      - id: check-yaml
