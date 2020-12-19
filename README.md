@@ -54,6 +54,8 @@ You can also install terraform on the controller node using the following comman
 vagrant provision --provision-with terraform
 ```
 
+You can change terraform version in the `.env` file (or using `TERRAFORM_VER` environment variable)
+
 There's also the `profile` provision step that will configure the controller
 shell according to [this repo](https://github.com/bcochofel/dotfiles)
 
@@ -68,4 +70,15 @@ shell according to [this repo](https://github.com/bcochofel/dotfiles)
     - vagrant-hostmanager
     - vagrant-scp
     - vagrant-env
-- You can change some variables for kubespray in the `.env` file
+- You can change some variables for kubespray in the `.env` file (or using environment variables)
+
+### Environment variables
+
+The following environment variables can be used to overwrite values from `.env` file:
+
+- KUBESPRAY_VER (defaults to 'v2.14.2')
+- KUBE_VERSION (defaults to 'v1.18.10')
+- KUBE_NETWORK_PLUGIN (defaults to 'calico')
+- CLUSTER_NAME (defaults to 'k8slab')
+- DNS_DOMAIN (defaults to 'cluster.local')
+- TERRAFORM_VER (defaults to '0.14.3')
