@@ -27,6 +27,7 @@ kube_version = ENV["KUBE_VERSION"] || "v1.18.10"
 kube_network_plugin = ENV["KUBE_NETWORK_PLUGIN"] || "calico"
 cluster_name = ENV["CLUSTER_NAME"] || "k8slab"
 dns_domain = ENV["DNS_DOMAIN"] || "cluster.local"
+terraform_ver = ENV["TERRAFORM_VER"] || "0.14.3"
 
 # control node
 ctrlnodes = [
@@ -171,6 +172,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # terraform
       config.vm.provision "terraform", type: "shell", run: "never", privileged: false do |m|
         m.path = "scripts/terraform.sh"
+        m.env = {
+          "TERRAFORM_VER" => terraform_ver
+        }
       end
 
       # profile
