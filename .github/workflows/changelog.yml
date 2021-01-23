@@ -4,6 +4,7 @@ on:
     branches:
       - '*' # all branches
       - '!main' # exclude main branch
+      - '!master' # exclude main branch
 
 jobs:
   changelog:
