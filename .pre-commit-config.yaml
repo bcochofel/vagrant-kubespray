@@ -9,3 +9,8 @@ repos:
       - id: check-merge-conflict
       - id: no-commit-to-branch
       - id: check-yaml
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: master
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]

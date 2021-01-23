@@ -1,0 +1,30 @@
+name: Release
+on:
+  push:
+    branches:
+      - '*' # all branches
+      - '!main' # exclude main branch
+
+jobs:
+  changelog:
+    name: Changelog
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.8
+        with:
+          versionSpec: '5.x'
+      - name: Use GitVersion
+        uses: gittools/actions/gitversion/execute@v0.9.8
+        id: gitversion
+      - name: Changelog
+        id: changelog
+        uses: nuuday/github-changelog-action@v1.0.0
+        with:
+          next_version: "${{ steps.gitversion.outputs.majorMinorPatch }}"
+      - name: Commit Changelog
+        uses: stefanzweifel/git-auto-commit-action@v4
