@@ -8,6 +8,9 @@
 - first release
 - initial commit
 
+### Refactor
+- github actions job name
+
 ### Pull Requests
 - Merge pull request [#6](https://github.com/bcochofel/vagrant-kubespray/issues/6) from bcochofel/some-fixes
 - Merge pull request [#5](https://github.com/bcochofel/vagrant-kubespray/issues/5) from bcochofel/github-actions
