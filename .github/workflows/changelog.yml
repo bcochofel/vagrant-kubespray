@@ -6,8 +6,8 @@ on:
       - '!main' # exclude main branch
 
 jobs:
-  release:
-    name: Release
+  changelog:
+    name: Changelog
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
