@@ -8,6 +8,6 @@ To run this repository you need:
 You can also use [pre-commit](https://pre-commit.com/#install). After installing
 `pre-commit` just execute:
 
-```ShellSession
+```bash
 pre-commit install
 ```
