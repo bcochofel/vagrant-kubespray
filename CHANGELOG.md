@@ -2,10 +2,25 @@
 ## [Unreleased]
 
 
+<a name="1.0.2"></a>
+## [1.0.2] - 2021-03-27
+### Docs
+- update
+
+### Fix
+- bootstrap k8s
+- k8s.sh
+- kubespray configuration
+- bootstrap for ansible
+
+
 <a name="1.0.1"></a>
 ## [1.0.1] - 2021-03-27
 ### Feat
 - upgrade kubernetes
+
+### Pull Requests
+- Merge pull request [#9](https://github.com/bcochofel/vagrant-kubespray/issues/9) from bcochofel/upgrade_k8s
 
 
 <a name="1.0.0"></a>
@@ -34,6 +49,7 @@
 - Merge pull request [#1](https://github.com/bcochofel/vagrant-kubespray/issues/1) from bcochofel/initial-commit
 
 
-[Unreleased]: https://github.com/bcochofel/vagrant-kubespray/compare/1.0.1...HEAD
+[Unreleased]: https://github.com/bcochofel/vagrant-kubespray/compare/1.0.2...HEAD
+[1.0.2]: https://github.com/bcochofel/vagrant-kubespray/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/bcochofel/vagrant-kubespray/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/bcochofel/vagrant-kubespray/compare/0.1.0...1.0.0

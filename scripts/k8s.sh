@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# install kustomize
-curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
-sudo cp kustomize /usr/local/bin/
-sudo chmod a+x /usr/local/bin/kustomize
-
 # clone kubespray repository and install dependencies
 git clone -b ${KUBESPRAY_VER} https://github.com/kubernetes-sigs/kubespray.git
 sudo chown vagrant.vagrant kubespray -R
@@ -24,18 +19,6 @@ CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inv
 
 K8S_CLUSTER_YML=inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml
 
-# cluster_name
-sed -i "s/\(cluster_name\):.*/\1: ${CLUSTER_NAME}/" ${K8S_CLUSTER_YML}
-
-# dns_domain
-sed -i "s/\(dns_domain\):.*/\1: ${DNS_DOMAIN}/" ${K8S_CLUSTER_YML}
-
-# kubenetwork_plugin
-sed -i "s/\(kube_network_plugin\):.*/\1: ${KUBE_NETWORK_PLUGIN}/" ${K8S_CLUSTER_YML}
-
-# kube_version
-sed -i "s/\(kube_version\):.*/\1: ${KUBE_VERSION}/" ${K8S_CLUSTER_YML}
-
 # kubectl configuration
 sed -i "s/.*\(kubeconfig_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
 sed -i "s/.*\(kubectl_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
@@ -53,6 +36,5 @@ ansible-playbook -i inventory/mycluster/hosts.yaml --become --become-user=root c
 mkdir -p ~/.kube
 cp inventory/mycluster/artifacts/admin.conf ~/.kube/config
 sudo cp inventory/mycluster/artifacts/kubectl /usr/local/bin/kubectl
-kubectl config rename-context "kubernetes-admin-k8slab@${CLUSTER_NAME}" ${CLUSTER_NAME}
 
 exit 0

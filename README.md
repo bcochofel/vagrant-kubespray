@@ -5,16 +5,12 @@
 This repository will create a Kubernetes Cluster, using Kubespray,
 so it can be used for a Lab Environment.
 
-It will create 3 VMs:
+It will create 4 VMs:
 
 - node0[1-3]: 1 k8s master and 2 worker nodes (2 vcpu and 4GB RAM each)
 - controller: controller node (2 vcpu, 2GB RAM)
 
-Both `kubectl` and `kustomize` binaries will be installed on the controller
-node.
-
-The `Vagrantfile` has a trigger to generate an SSH key pair for the controller
-so it can be used with ansible.
+`kubectl` binary will be installed on the controller node.
 
 This repository was tested using
 
@@ -26,33 +22,27 @@ This repository was tested using
 
 Check the variables defined on the `.env` file.
 
+**NOTE:** The bootstrap uses the ```~/.ssh/id_rsa``` and ```~/.ssh/id_rsa.pub```,
+so if you don't have these files, you need to create using:
+
+```bash
+ssh-keygen -t rsa
+```
+
 To create the k8s cluster just run:
 
-```ShellSession
+```bash
 vagrant up
 vagrant provision --provision-with k8s
 ```
 
 You can now connect to the controller node and use kubectl using:
 
-```ShellSession
+```bash
 vagrant ssh controller
 
 kubectl cluster-info
 ```
-
-## Add-ons
-
-You can also install terraform on the controller node using the following command:
-
-```ShellSession
-vagrant provision --provision-with terraform
-```
-
-You can change terraform version in the `.env` file (or using `TERRAFORM_VER` environment variable)
-
-There's also the `profile` provision step that will configure the controller
-shell according to [this repo](https://github.com/bcochofel/dotfiles)
 
 ## Documentation
 
@@ -62,9 +52,8 @@ shell according to [this repo](https://github.com/bcochofel/dotfiles)
 ## Some notes
 
 - This uses the following Vagrant plugins (automatically installed):
-    - vagrant-hostmanager
-    - vagrant-scp
-    - vagrant-env
+  - vagrant-hostmanager
+  - vagrant-env
 - You can change some variables for kubespray in the `.env` file (or using environment variables)
 
 ### Environment variables
@@ -72,17 +61,12 @@ shell according to [this repo](https://github.com/bcochofel/dotfiles)
 The following environment variables can be used to overwrite values from `.env` file:
 
 - KUBESPRAY_VER (defaults to 'v2.14.2')
-- KUBE_VERSION (defaults to 'v1.18.10')
-- KUBE_NETWORK_PLUGIN (defaults to 'calico')
-- CLUSTER_NAME (defaults to 'k8slab')
-- DNS_DOMAIN (defaults to 'cluster.local')
-- TERRAFORM_VER (defaults to '0.14.3')
 
-# pre-commit hooks
+## pre-commit hooks
 
 Read the [pre-commit hooks](docs/pre-commit-hooks.md) document for more info.
 
-# git-chglog
+## git-chglog
 
 Read the [git-chglog](docs/git-chlog.md) document for more info.
 
