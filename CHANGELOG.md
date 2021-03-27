@@ -5,6 +5,7 @@
 <a name="1.0.2"></a>
 ## [1.0.2] - 2021-03-27
 ### Fix
+- k8s.sh
 - kubespray configuration
 - bootstrap for ansible
 
