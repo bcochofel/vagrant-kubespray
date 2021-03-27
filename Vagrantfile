@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 # Check for missing plugins
-required_plugins = %w(vagrant-hostmanager vagrant-scp vagrant-env)
+required_plugins = %w(vagrant-hostmanager vagrant-env)
 plugin_installed = false
 required_plugins.each do |plugin|
   unless Vagrant.has_plugin?(plugin)
@@ -22,12 +22,12 @@ end
 VAGRANTFILE_API_VERSION = "2"
 DEFAULT_BOX_NAME = "bento/ubuntu-20.04"
 
-kubespray_ver = ENV["KUBESPRAY_VER"] || "v2.14.2"
+kubespray_ver = ENV["KUBESPRAY_VER"] || "v2.15.0"
 kube_version = ENV["KUBE_VERSION"] || "v1.18.10"
 kube_network_plugin = ENV["KUBE_NETWORK_PLUGIN"] || "calico"
 cluster_name = ENV["CLUSTER_NAME"] || "k8slab"
 dns_domain = ENV["DNS_DOMAIN"] || "cluster.local"
-terraform_ver = ENV["TERRAFORM_VER"] || "0.14.3"
+terraform_ver = ENV["TERRAFORM_VER"] || "0.14.9"
 
 # control node
 ctrlnodes = [
@@ -36,7 +36,7 @@ ctrlnodes = [
     :ip => "192.168.77.10",
     :ram => 2048,
     :cpus => 2,
-    :box => "bento/ubuntu-18.04"
+    :box => "bento/ubuntu-20.04"
   }
 ]
 
@@ -156,6 +156,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       config.vm.provision "preinst", type: "shell" do |m|
         m.path = "scripts/preinst.sh"
       end
+
+      # copy files
+      config.vm.provision "file", source: "/tmp/vagrant_rsa", destination: "~/.ssh/id_rsa"
+      config.vm.provision "file", source: "./ansible.cfg", destination: "~/.ansible.cfg"
 
       # kubernetes
       config.vm.provision "k8s", type: "shell", run: "never", privileged: false do |m|
