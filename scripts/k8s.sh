@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# install kustomize
-curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
-sudo cp kustomize /usr/local/bin/
-sudo chmod a+x /usr/local/bin/kustomize
-
 # clone kubespray repository and install dependencies
 git clone -b ${KUBESPRAY_VER} https://github.com/kubernetes-sigs/kubespray.git
 sudo chown vagrant.vagrant kubespray -R
@@ -39,6 +34,5 @@ ansible-playbook -i inventory/mycluster/hosts.yaml --become --become-user=root c
 mkdir -p ~/.kube
 cp inventory/mycluster/artifacts/admin.conf ~/.kube/config
 sudo cp inventory/mycluster/artifacts/kubectl /usr/local/bin/kubectl
-kubectl config rename-context "kubernetes-admin-k8slab@${CLUSTER_NAME}" ${CLUSTER_NAME}
 
 exit 0
