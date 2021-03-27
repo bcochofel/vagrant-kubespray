@@ -4,6 +4,9 @@
 
 <a name="1.0.2"></a>
 ## [1.0.2] - 2021-03-27
+### Docs
+- update
+
 ### Fix
 - bootstrap k8s
 - k8s.sh
