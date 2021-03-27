@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 # Check for missing plugins
-required_plugins = %w(vagrant-hostmanager vagrant-env)
+required_plugins = %w(vagrant-hostmanager vagrant-scp vagrant-env)
 plugin_installed = false
 required_plugins.each do |plugin|
   unless Vagrant.has_plugin?(plugin)
@@ -23,11 +23,6 @@ VAGRANTFILE_API_VERSION = "2"
 DEFAULT_BOX_NAME = "bento/ubuntu-20.04"
 
 kubespray_ver = ENV["KUBESPRAY_VER"] || "v2.15.0"
-kube_version = ENV["KUBE_VERSION"] || "v1.18.10"
-kube_network_plugin = ENV["KUBE_NETWORK_PLUGIN"] || "calico"
-cluster_name = ENV["CLUSTER_NAME"] || "k8slab"
-dns_domain = ENV["DNS_DOMAIN"] || "cluster.local"
-terraform_ver = ENV["TERRAFORM_VER"] || "0.14.9"
 
 # control node
 ctrlnodes = [
@@ -110,24 +105,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         m.path = "scripts/preinst.sh"
       end
 
+      # ssh public key
+      id_rsa_pub = File.read("#{Dir.home}/.ssh/id_rsa.pub")
+      config.vm.provision "copy ssh public key", type: "shell",
+        inline: "echo \"#{id_rsa_pub}\" >> /home/vagrant/.ssh/authorized_keys"
+
     end
   end
 
   # control nodes
   ctrlnodes.each do |ctrl|
     config.vm.define ctrl[:hostname] do |config|
-      ### triggers ###
-
-      config.trigger.before :up do |trigger|
-        trigger.name = "Generate SSH Key pair for controller"
-        trigger.run = { path: "scripts/trigger_before.sh" }
-      end
-
-      config.trigger.after :up do |trigger|
-        trigger.name = "Copy SSH public key to nodes"
-        trigger.run = { path: "scripts/trigger_after.sh" }
-      end
-
       ### vm definitions ###
 
       config.vm.hostname = ctrl[:hostname]
@@ -158,32 +146,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       end
 
       # copy files
-      config.vm.provision "file", source: "/tmp/vagrant_rsa", destination: "~/.ssh/id_rsa"
+      config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"
       config.vm.provision "file", source: "./ansible.cfg", destination: "~/.ansible.cfg"
 
       # kubernetes
       config.vm.provision "k8s", type: "shell", run: "never", privileged: false do |m|
         m.path = "scripts/k8s.sh"
         m.env = {
-          "KUBESPRAY_VER" => kubespray_ver,
-          "KUBE_VERSION" => kube_version,
-          "KUBE_NETWORK_PLUGIN" => kube_network_plugin,
-          "CLUSTER_NAME" => cluster_name,
-          "DNS_DOMAIN" => dns_domain
+          "KUBESPRAY_VER" => kubespray_ver
         }
-      end
-
-      # terraform
-      config.vm.provision "terraform", type: "shell", run: "never", privileged: false do |m|
-        m.path = "scripts/terraform.sh"
-        m.env = {
-          "TERRAFORM_VER" => terraform_ver
-        }
-      end
-
-      # profile
-      config.vm.provision "profile", type: "shell", run: "never", privileged: false do |m|
-        m.path = "scripts/profile.sh"
       end
 
     end
