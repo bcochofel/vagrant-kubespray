@@ -17,6 +17,8 @@ CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inv
 
 # Review and change parameters under ``inventory/mycluster/group_vars``
 
+K8S_CLUSTER_YML=inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml
+
 # kubectl configuration
 sed -i "s/.*\(kubeconfig_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
 sed -i "s/.*\(kubectl_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}

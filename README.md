@@ -22,16 +22,23 @@ This repository was tested using
 
 Check the variables defined on the `.env` file.
 
+**NOTE:** The bootstrap uses the ```~/.ssh/id_rsa``` and ```~/.ssh/id_rsa.pub```,
+so if you don't have these files, you need to create using:
+
+```bash
+ssh-keygen -t rsa
+```
+
 To create the k8s cluster just run:
 
-```ShellSession
+```bash
 vagrant up
 vagrant provision --provision-with k8s
 ```
 
 You can now connect to the controller node and use kubectl using:
 
-```ShellSession
+```bash
 vagrant ssh controller
 
 kubectl cluster-info
