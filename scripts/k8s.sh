@@ -22,20 +22,6 @@ CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inv
 
 # Review and change parameters under ``inventory/mycluster/group_vars``
 
-K8S_CLUSTER_YML=inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml
-
-# cluster_name
-sed -i "s/\(cluster_name\):.*/\1: ${CLUSTER_NAME}/" ${K8S_CLUSTER_YML}
-
-# dns_domain
-sed -i "s/\(dns_domain\):.*/\1: ${DNS_DOMAIN}/" ${K8S_CLUSTER_YML}
-
-# kubenetwork_plugin
-sed -i "s/\(kube_network_plugin\):.*/\1: ${KUBE_NETWORK_PLUGIN}/" ${K8S_CLUSTER_YML}
-
-# kube_version
-sed -i "s/\(kube_version\):.*/\1: ${KUBE_VERSION}/" ${K8S_CLUSTER_YML}
-
 # kubectl configuration
 sed -i "s/.*\(kubeconfig_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
 sed -i "s/.*\(kubectl_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
