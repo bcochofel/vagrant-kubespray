@@ -55,6 +55,18 @@ nodes = [
     :ram => 4096,
     :cpus => 2
   },
+  {
+    :hostname => "node04",
+    :ip => "192.168.77.24",
+    :ram => 4096,
+    :cpus => 2
+  },
+  {
+    :hostname => "node05",
+    :ip => "192.168.77.25",
+    :ram => 4096,
+    :cpus => 2
+  }
 ]
 
 ### main ###
