@@ -2,6 +2,9 @@
 ## [Unreleased]
 
 
+<a name="1.0.3"></a>
+## [1.0.3] - 2021-07-19
+
 <a name="1.0.2"></a>
 ## [1.0.2] - 2021-03-27
 ### Docs
@@ -12,6 +15,9 @@
 - k8s.sh
 - kubespray configuration
 - bootstrap for ansible
+
+### Pull Requests
+- Merge pull request [#10](https://github.com/bcochofel/vagrant-kubespray/issues/10) from bcochofel/fix_bootstrap
 
 
 <a name="1.0.1"></a>
@@ -49,7 +55,8 @@
 - Merge pull request [#1](https://github.com/bcochofel/vagrant-kubespray/issues/1) from bcochofel/initial-commit
 
 
-[Unreleased]: https://github.com/bcochofel/vagrant-kubespray/compare/1.0.2...HEAD
+[Unreleased]: https://github.com/bcochofel/vagrant-kubespray/compare/1.0.3...HEAD
+[1.0.3]: https://github.com/bcochofel/vagrant-kubespray/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/bcochofel/vagrant-kubespray/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/bcochofel/vagrant-kubespray/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/bcochofel/vagrant-kubespray/compare/0.1.0...1.0.0
