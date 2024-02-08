@@ -60,7 +60,7 @@ kubectl cluster-info
 
 The following environment variables can be used to overwrite values from `.env` file:
 
-- KUBESPRAY_VER (defaults to 'v2.14.2')
+- KUBESPRAY_VER
 
 ## pre-commit hooks
 

@@ -22,16 +22,16 @@ end
 VAGRANTFILE_API_VERSION = "2"
 DEFAULT_BOX_NAME = "bento/ubuntu-20.04"
 
-kubespray_ver = ENV["KUBESPRAY_VER"] || "v2.15.0"
+kubespray_ver = ENV["KUBESPRAY_VER"] || "v2.24.0"
 
 # control node
 ctrlnodes = [
   {
     :hostname => "controller",
-    :ip => "192.168.77.10",
+    :ip => "192.168.56.10",
     :ram => 2048,
     :cpus => 2,
-    :box => "bento/ubuntu-20.04"
+    :box => "bento/ubuntu-22.04"
   }
 ]
 
@@ -39,19 +39,19 @@ ctrlnodes = [
 nodes = [
   {
     :hostname => "node01",
-    :ip => "192.168.77.21",
+    :ip => "192.168.56.21",
     :ram => 4096,
     :cpus => 2
   },
   {
     :hostname => "node02",
-    :ip => "192.168.77.22",
+    :ip => "192.168.56.22",
     :ram => 4096,
     :cpus => 2
   },
   {
     :hostname => "node03",
-    :ip => "192.168.77.23",
+    :ip => "192.168.56.23",
     :ram => 4096,
     :cpus => 2
   },

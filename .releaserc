@@ -1,0 +1,38 @@
+{
+    "branches": [
+        "master"
+    ],
+    "tagFormat": "${version}",
+    "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        [
+            "@semantic-release/github",
+            {
+                "assets": [
+                    {
+                        "path": "Vagrantfile",
+                        "label": "Vagrant file"
+                    },
+                    {
+                        "path": "scripts/",
+                        "label": "Provisioning scripts"
+                    }
+                ]
+            }
+        ],
+        [
+            "@semantic-release/changelog",
+            {
+                "changelogTitle": "# Changelog\n\nAll notable changes to this project will be documented in this file. See\n[Conventional Commits](https://conventionalcommits.org) for commit guidelines."
+            }
+        ],
+        [
+            "@semantic-release/git",
+            {
+                "message": "chore: Release ${nextRelease.version}\n\n${nextRelease.notes}"
+            }
+        ]
+    ],
+    "preset": "conventionalcommits"
+}
