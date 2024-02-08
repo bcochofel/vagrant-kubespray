@@ -6,18 +6,18 @@ sudo chown vagrant.vagrant kubespray -R
 cd kubespray
 
 # Install dependencies from ``requirements.txt``
-sudo pip3 install -r requirements.txt
+pip3 install -r requirements.txt
 
 # Copy ``inventory/sample`` as ``inventory/mycluster``
 cp -rfp inventory/sample inventory/mycluster
 
 # Update Ansible inventory file with inventory builder
-declare -a IPS=(192.168.77.21 192.168.77.22 192.168.77.23)
+declare -a IPS=(192.168.56.21 192.168.56.22 192.168.56.23)
 CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
 
 # Review and change parameters under ``inventory/mycluster/group_vars``
 
-K8S_CLUSTER_YML=inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml
+K8S_CLUSTER_YML=inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
 
 # kubectl configuration
 sed -i "s/.*\(kubeconfig_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
