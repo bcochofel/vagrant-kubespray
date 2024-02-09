@@ -1,3 +1,4 @@
+# https://github.com/marketplace/actions/action-for-semantic-release
 name: Release
 on:
   push:
@@ -11,8 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Semantic-release
-        uses: codfish/semantic-release-action@v3
+        uses: cycjimmy/semantic-release-action@v4
+        with:
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
