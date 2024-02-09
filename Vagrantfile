@@ -20,7 +20,8 @@ end
 
 # Vagrant variables
 VAGRANTFILE_API_VERSION = "2"
-DEFAULT_BOX_NAME = "bento/debian-12"
+DEFAULT_BOX_NAME = "bento/ubuntu-22.04"
+DEFAULT_BOX_VERSION = "202303.13.0"
 
 kubespray_ver = ENV["KUBESPRAY_VER"] || "v2.24.0"
 
@@ -31,7 +32,6 @@ ctrlnodes = [
     :ip => "192.168.56.10",
     :ram => 2048,
     :cpus => 2,
-    :box => "bento/ubuntu-22.04"
   }
 ]
 
@@ -79,7 +79,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ### vm definitions ###
 
       config.vm.hostname = node[:hostname]
+
+      config.vm.boot_timeout = 900
+
       config.vm.box = node[:box] ? node[:box] : DEFAULT_BOX_NAME;
+      config.vm.box_version = node[:box_version] ? node[:box_version] : DEFAULT_BOX_VERSION;
+
       config.vm.network :private_network, ip: node[:ip]
 
       memory = node[:ram];
@@ -119,7 +124,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       ### vm definitions ###
 
       config.vm.hostname = ctrl[:hostname]
+
+      config.vm.boot_timeout = 900
+
       config.vm.box = ctrl[:box] ? ctrl[:box] : DEFAULT_BOX_NAME;
+      config.vm.box_version = ctrl[:box_version] ? ctrl[:box_version] : DEFAULT_BOX_VERSION;
+
       config.vm.network :private_network, ip: ctrl[:ip]
 
       memory = ctrl[:ram];

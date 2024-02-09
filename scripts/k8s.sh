@@ -6,7 +6,7 @@ sudo chown vagrant.vagrant kubespray -R
 cd kubespray
 
 # Install dependencies from ``requirements.txt``
-pip3 install -r requirements.txt
+sudo pip3 install -r requirements.txt
 
 # Copy ``inventory/sample`` as ``inventory/mycluster``
 cp -rfp inventory/sample inventory/mycluster
@@ -20,8 +20,8 @@ CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inv
 K8S_CLUSTER_YML=inventory/mycluster/group_vars/k8s_cluster/k8s-cluster.yml
 
 # kubectl configuration
-sed -i "s/.*\(kubeconfig_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
-sed -i "s/.*\(kubectl_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
+#sed -i "s/.*\(kubeconfig_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
+#sed -i "s/.*\(kubectl_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
 
 # enable cert_manager
 #sed -i "s/\(cert_manager_enabled\):.*/\1: true/" inventory/mycluster/group_vars/k8s-cluster/addons.yml
@@ -30,11 +30,12 @@ sed -i "s/.*\(kubectl_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
 # The option `--become` is required, as for example writing SSL keys in /etc/,
 # installing packages and interacting with various systemd daemons.
 # Without --become the playbook will fail to run!
-ansible-playbook -i inventory/mycluster/hosts.yaml --become --become-user=root cluster.yml
+#ansible-playbook -i inventory/mycluster/hosts.yaml --become --become-user=root cluster.yml
+ansible-playbook -i inventory/mycluster/hosts.yaml --become cluster.yml
 
 # kubectl configuration
-mkdir -p ~/.kube
-cp inventory/mycluster/artifacts/admin.conf ~/.kube/config
-sudo cp inventory/mycluster/artifacts/kubectl /usr/local/bin/kubectl
+#mkdir -p ~/.kube
+#cp inventory/mycluster/artifacts/admin.conf ~/.kube/config
+#sudo cp inventory/mycluster/artifacts/kubectl /usr/local/bin/kubectl
 
 exit 0
