@@ -15,7 +15,7 @@
                         "label": "Vagrant file"
                     },
                     {
-                        "path": "scripts/",
+                        "path": "scripts/**",
                         "label": "Provisioning scripts"
                     }
                 ]
