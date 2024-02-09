@@ -11,25 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: '0'
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.8
-        with:
-          versionSpec: '5.x'
-      - name: Use GitVersion
-        uses: gittools/actions/gitversion/execute@v0.9.8
-        id: gitversion
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
+        uses: actions/checkout@v3
+      - name: Semantic-release
+        uses: codfish/semantic-release-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.gitversion.outputs.majorMinorPatch }}
-          release_name: Release ${{ steps.gitversion.outputs.majorMinorPatch }}
-          body: |
-            [CHANGELOG](./CHANGELOG.md)
-          draft: false
-          prerelease: false
