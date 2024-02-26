@@ -157,6 +157,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       # copy files
       config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"
+      config.vm.provision "shell", inline: <<-SHELL
+      chmod 600 /home/vagrant/.ssh/id_rsa
+      SHELL
       config.vm.provision "file", source: "./ansible.cfg", destination: "~/.ansible.cfg"
 
       # kubernetes
