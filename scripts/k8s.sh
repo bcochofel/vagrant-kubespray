@@ -24,7 +24,7 @@ sed -i "s/.*\(kubeconfig_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
 sed -i "s/.*\(kubectl_localhost\):.*/\1: true/" ${K8S_CLUSTER_YML}
 
 # enable cert_manager
-sed -i "s/\(cert_manager_enabled\):.*/\1: true/" inventory/mycluster/group_vars/k8s-cluster/addons.yml
+sed -i "s/\(cert_manager_enabled\):.*/\1: true/" inventory/mycluster/group_vars/k8s_cluster/addons.yml
 
 # Deploy Kubespray with Ansible Playbook - run the playbook as root
 # The option `--become` is required, as for example writing SSL keys in /etc/,
